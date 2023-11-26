@@ -43,7 +43,6 @@ export const updateAnime = async(variables) => {
         })
 
         const data = await response.json();
-        console.log("data from updateAnime",data);
         return data?.data?.SaveMediaListEntry;
 
     } catch (error) {
