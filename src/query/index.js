@@ -10,6 +10,14 @@ const searchQuery = `
           english
           native
         }
+        nextAiringEpisode {
+          id
+          timeUntilAiring
+          airingAt
+          episode
+        }
+        averageScore
+        description
         episodes
         genres
         season
