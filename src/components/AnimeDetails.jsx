@@ -1,5 +1,6 @@
 import React from 'react'
 import { useAppContext } from '../context/AppContext'
+import { formatTime } from '../utils'
 
 const AnimeDetails = ({anime}) => {
 
@@ -7,8 +8,8 @@ const AnimeDetails = ({anime}) => {
   // const key = anime.id
 
   return (
-    <div className='max-w-[400px] mt-3 p-2 hover:bg-lighGrey font-display max-h-screen'>
-        <div className="hover:cursor-pointer " onClick={() => titleClickHandler(anime.id)}>
+    <div className='max-w-[400px] p-2 font-display max-h-screen'>
+        <div className='p-1'>
           {/* heading  */}
           {/* <Link to={`/anime/${anime.id}`}> */}
             {anime.title.english !== null ? (
@@ -18,17 +19,18 @@ const AnimeDetails = ({anime}) => {
             )}
           {/* </Link> */}
         </div>
-        <div className='flex mt-1 justify-center items-center text-sm'>
+        <div onClick={() => titleClickHandler(anime.id)} className='flex mt-1 hover:cursor-pointer hover:bg-lighGrey p-1 rounded-sm items-center text-sm'>
           {/* image  */}
             <img height={75} width={75} className="rounded-sm" src={anime.coverImage.medium} alt={anime.title.english} />
             <div className='text-white ml-5'>
             {/* anime details */}
                   {
-                    anime.episodes===null? <p>NA</p> : <p>Episodes : {anime.episodes}</p>
+                    anime.episodes===null? <p>Episodes : {(`${anime.nextAiringEpisode?.episode}`)-1}</p> : 
+                    (anime.format === "MOVIE"? <p>Movie {formatTime(anime?.duration)}</p> : <p>Episodes : {anime.episodes}</p>)
                   }
                   <p>Status : {anime.status}</p>
                   <p>StartDate : {anime.startDate.year}-{anime.startDate.month}-{anime.startDate.day}</p>
-                  <p>{anime.genres.join((', '))}</p>
+                  <p>{anime?.genres?.join((', '))}</p>
             </div>
         </div>
     </div>
